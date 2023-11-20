@@ -12,8 +12,6 @@ import ChangePassword from './pages/ChangePassword'
 import Header from './components/Header'
 import ToDoList from './components/ToDoList'
 import ToDoList2 from './components/ToDoList2'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/electron-vite.animate.svg'
 import './App.css'
 
 function App() {
