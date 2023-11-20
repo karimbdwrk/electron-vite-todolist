@@ -148,6 +148,7 @@ const ToDoList2 = () => {
 
 	const handleIsEdited = () => {
 		setIsEdited(true);
+		setEditName(name);
 	};
 
 	const handleEditList = (e) => {

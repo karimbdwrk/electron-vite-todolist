@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 import { useAuthContext } from "../context/AuthContext";
 import { getToken } from "../helpers";
 
@@ -71,6 +72,23 @@ const HomePage = () => {
 		}
 	};
 
+	const handleDelete = async (id) => {
+		console.log("handle delete", id);
+		try {
+			await fetch(`http://localhost:1337/api/todolists/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-type": "application/json",
+					Authorization: `Bearer ${jwt}`,
+				},
+			});
+		} catch (error) {
+			console.error(error);
+		} finally {
+			fetchData();
+		}
+	};
+
 	return (
 		<>
 			<h1>
@@ -79,11 +97,16 @@ const HomePage = () => {
 			<div className='lists'>
 				{user &&
 					lists.map((list, id) => (
-						<Link key={id} to={`/todolist/${list.id}`}>
-							<div className='card'>
-								<h3>{list.title}</h3>
-							</div>
-						</Link>
+						<div key={id}>
+							<Link to={`/todolist/${list.id}`}>
+								<div className='card'>
+									<h3>{list.title}</h3>
+								</div>
+							</Link>
+							<button onClick={() => handleDelete(list.id)}>
+								<AiOutlineClose />
+							</button>
+						</div>
 					))}
 			</div>
 			{user && (
